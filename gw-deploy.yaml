@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tyk-gtw
+  labels:
+    app: tyk-gtw
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tyk-gtw
+  template:
+    metadata:
+      labels:
+        app: tyk-gtw
+    spec:
+      containers:
+        - name: tyk-gtw
+          image: "tykio/tyk-gateway:v3.1.0"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8089
+          env:
+            - name: TYK_GW_LISTENPORT
+              value: "8080"
+            - name: TYK_GW_SECRET
+              value: "foo"
+            - name: TYK_GW_STORAGE_HOST
+              value: "redis"
+            - name: TYK_GW_STORAGE_PORT
+              value: "6379"
+            - name: TYK_GW_STORAGE_PASSWORD
+              value: ""
+            - name: TYK_LOGLEVEL
+              value: "info"
+            - name: GODEBUG
+              value: "netdns=cgo"
+          volumeMounts:
+            - name: tyk-gateway-conf
+              mountPath: /opt/tyk-gateway/tyk.conf
+              subPath: tyk.conf
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+      volumes:
+        - name: tyk-gateway-conf
+          configMap:
+            name: tyk-gateway-conf
+            items:
+              - key: tyk.conf
+                path: tyk.conf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tyk-svc
+  labels:
+    app: tyk-gtw
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: tyk-gtw
