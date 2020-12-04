@@ -31,3 +31,15 @@ time="Dec 04 19:19:39" level=info msg="API reload complete" prefix=main
 
 We see that now our Gateway is ready to accept requests.  Use the [Gateway REST API](https://tyk.io/docs/tyk-gateway-api/) to create your first API
 OR, use the [Tyk-Operator](https://github.com/TykTechnologies/tyk-operator) to declaratively create and manage your API definitions using the kubectl cli.
+
+## Tyk Operator
+
+If combining with [Tyk Operator]((https://github.com/TykTechnologies/tyk-operator)), you can use the following secret config to have the Tyk Operator control the Tyk Gateway using the K8S DNS name.  Follow the install instructions for Tyk Operator if this doesn't make sense.
+
+```
+kubectl create secret -n tyk-operator-system generic tyk-operator-conf \
+  --from-literal "TYK_AUTH=foo" \
+  --from-literal "TYK_ORG=oss" \
+  --from-literal "TYK_MODE=oss" \
+  --from-literal "TYK_URL=http://tyk-svc.default.svc.cluster.local:8080"
+```
