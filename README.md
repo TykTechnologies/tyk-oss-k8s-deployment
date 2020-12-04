@@ -30,3 +30,4 @@ time="Dec 04 19:19:39" level=info msg="API reload complete" prefix=main
 ```
 
 We see that now our Gateway is ready to accept requests.  Use the [Gateway REST API](https://tyk.io/docs/tyk-gateway-api/) to create your first API
+OR, use the [Tyk-Operator](https://github.com/TykTechnologies/tyk-operator) to declaratively create and manage your API definitions using the kubectl cli.
