@@ -2,7 +2,12 @@
 
 This contains deployment files to run a Tyk GW with Redis in a kubernetes cluster.
 
-To install, just run the following command from within the directory:
+1. Clone this directory:
+```
+$ git clone TykTechnologies/tyk-oss-k8s-deployment
+```
+
+2. To install, just run the following command from within the directory:
 ```
 $ kubectl apply -f .
 configmap/tyk-gateway-conf created
@@ -12,7 +17,7 @@ deployment.apps/redis created
 service/redis created
 ```
 
-Check logs to ensure its running
+3. Check logs to ensure its running
 
 ```
 $ kubectl get pods
