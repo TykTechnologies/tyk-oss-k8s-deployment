@@ -4,7 +4,7 @@ This contains deployment files to run a Tyk GW with Redis in a kubernetes cluste
 
 1. Clone this directory:
 ```
-$ git clone TykTechnologies/tyk-oss-k8s-deployment
+$ git clone git@github.com:TykTechnologies/tyk-oss-k8s-deployment.git
 ```
 
 2. To install, just run the following command from within the directory:
