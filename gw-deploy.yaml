@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: tyk-gtw
-          image: "tykio/tyk-gateway:v3.1.0"
+          image: "tykio/tyk-gateway:v3.2.2"
           imagePullPolicy: Always
           ports:
             - containerPort: 8089
@@ -35,10 +35,10 @@ spec:
               value: "info"
             - name: GODEBUG
               value: "netdns=cgo"
-          volumeMounts:
-            - name: tyk-gateway-conf
-              mountPath: /opt/tyk-gateway/tyk.conf
-              subPath: tyk.conf
+            - name: TYK_GATEWAY_NAMESPACE
+              value: tyk
+            - name: APICLARITY_HOST
+              value: apiclarity-apiclarity.apiclarity:9000
           resources:
             limits:
               memory: 512Mi
@@ -46,7 +46,40 @@ spec:
             requests:
               memory: 256Mi
               cpu: "0.2"
+          volumeMounts:
+            - name: tyk-gateway-conf
+              mountPath: /opt/tyk-gateway/tyk.conf
+              subPath: tyk.conf
+            - name: tyk-apidefs
+              subPath: httpbin.json
+              mountPath: /opt/tyk-gateway/apps/httpbin.json
+            - name: tyk-apidefs
+              subPath: jsonplaceholder.json
+              mountPath: /opt/tyk-gateway/apps/jsonplaceholder.json
+            - mountPath: /plugins/
+              name: tyk-apiclarity-trace-plugin
+      initContainers:
+        - command:
+          - cp
+          - /plugins/tyk-plugin.so
+          - /plugin/.
+          image: ghcr.io/apiclarity/tyk-plugin-v3.2.2:latest
+          imagePullPolicy: Always
+          name: apiclarity-tyk-plugin-injector
+          volumeMounts:
+          - mountPath: /plugin
+            name: tyk-apiclarity-trace-plugin
       volumes:
+        - name: tyk-apiclarity-trace-plugin
+          emptyDir: {}
+        - name: tyk-apidefs
+          configMap:
+            name: tyk-apidefs
+            items:
+              - key: httpbin.json
+                path: httpbin.json
+              - key: jsonplaceholder.json
+                path: jsonplaceholder.json
         - name: tyk-gateway-conf
           configMap:
             name: tyk-gateway-conf

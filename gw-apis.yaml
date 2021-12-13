@@ -1,0 +1,267 @@
+apiVersion: v1
+data:
+  httpbin.json: |
+    {
+      "api_id": "httpbin",
+      "use_keyless": true,
+      "active": true,
+      "hmac_allowed_clock_skew": -1,
+      "uptime_tests": {
+        "config": {
+          "service_discovery": {
+            "cache_timeout": 60
+          }
+        }
+      },
+      "name": "httpbin",
+      "slug": "httpbin",
+      "proxy": {
+        "target_url": "https://httpbin.org",
+        "strip_listen_path": true,
+        "listen_path": "/httpbin/"
+      },
+      "custom_middleware": {
+        "post": [
+          {
+            "name": "PostGetAPIDefinition",
+            "path": "/plugins/tyk-plugin.so"
+          }
+        ],
+        "response": [
+          {
+            "name": "ResponseSendTelemetry",
+            "path": "/plugins/tyk-plugin.so"
+          }
+        ],
+        "driver": "goplugin"
+      },
+      "version_data": {
+        "not_versioned": true,
+        "versions": {
+          "1.0-oas3": {
+            "name": "1.0-oas3",
+            "use_extended_paths": true,
+            "extended_paths": {
+              "track_endpoints": [
+                {
+                  "path": "/hidden-basic-auth/{user}/{password}",
+                  "method": "GET"
+                },
+                {
+                  "path": "/basic-auth/{user}/{password}",
+                  "method": "GET"
+                },
+                {
+                  "path": "/parse/{machine-timestamp}",
+                  "method": "GET"
+                },
+                {
+                  "path": "/when/{human-timestamp}",
+                  "method": "GET"
+                },
+                {
+                  "path": "/status/{statusCode}",
+                  "method": "PUT"
+                },
+                {
+                  "path": "/status/{statusCode}",
+                  "method": "GET"
+                },
+                {
+                  "path": "/status/{statusCode}",
+                  "method": "POST"
+                },
+                {
+                  "path": "/status/{statusCode}",
+                  "method": "DELETE"
+                },
+                {
+                  "path": "/status/{statusCode}",
+                  "method": "PATCH"
+                },
+                {
+                  "path": "/image/{format}",
+                  "method": "GET"
+                },
+                {
+                  "path": "/cookies/delete",
+                  "method": "GET"
+                },
+                {
+                  "path": "/cookies/set",
+                  "method": "GET"
+                },
+                {
+                  "path": "/user-agent",
+                  "method": "GET"
+                },
+                {
+                  "path": "/delay/{n}",
+                  "method": "GET"
+                },
+                {
+                  "path": "/headers",
+                  "method": "GET"
+                },
+                {
+                  "path": "/cookies",
+                  "method": "GET"
+                },
+                {
+                  "path": "/delete",
+                  "method": "DELETE"
+                },
+                {
+                  "path": "/bearer",
+                  "method": "GET"
+                },
+                {
+                  "path": "/image",
+                  "method": "GET"
+                },
+                {
+                  "path": "/cache",
+                  "method": "GET"
+                },
+                {
+                  "path": "/post",
+                  "method": "POST"
+                },
+                {
+                  "path": "/html",
+                  "method": "GET"
+                },
+                {
+                  "path": "/xml",
+                  "method": "GET"
+                },
+                {
+                  "path": "/get",
+                  "method": "GET"
+                },
+                {
+                  "path": "/ip",
+                  "method": "GET"
+                },
+                {
+                  "path": "/",
+                  "method": "GET"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "definition": {
+        "location": "header",
+        "key": "version"
+      },
+      "org_id": "5e9d9544a1dcd60001d0ed20",
+      "id": "61b7ab0af97ca60001e255be"
+    }
+  jsonplaceholder.json: |
+    {
+        "api_id": "jsonplaceholder",
+        "use_keyless": true,
+        "active": true,
+        "name": "JSON Placeholder",
+        "slug": "json-placeholder",
+        "proxy": {
+          "target_url": "https://jsonplaceholder.typicode.com",
+          "strip_listen_path": true,
+          "listen_path": "/jsonplaceholder/"
+        },
+        "custom_middleware": {
+          "post": [
+            {
+              "name": "PostGetAPIDefinition",
+              "path": "/plugins/tyk-plugin.so"
+            }
+          ],
+          "response": [
+            {
+              "name": "ResponseSendTelemetry",
+              "path": "/plugins/tyk-plugin.so"
+            }
+          ],
+          "driver": "goplugin"
+        },
+        "version_data": {
+          "not_versioned": true,
+          "versions": {
+            "1.0.0": {
+              "name": "1.0.0",
+              "use_extended_paths": true,
+              "extended_paths": {
+                "track_endpoints": [
+                  {
+                    "path": "/posts/{id}/comments",
+                    "method": "GET"
+                  },
+                  {
+                    "path": "/albums/{id}/photos",
+                    "method": "GET"
+                  },
+                  {
+                    "path": "/comments/{id}",
+                    "method": "GET"
+                  },
+                  {
+                    "path": "/photos/{id}",
+                    "method": "GET"
+                  },
+                  {
+                    "path": "/albums/{id}",
+                    "method": "GET"
+                  },
+                  {
+                    "path": "/users/{id}",
+                    "method": "GET"
+                  },
+                  {
+                    "path": "/todos/{id}",
+                    "method": "GET"
+                  },
+                  {
+                    "path": "/posts/{id}",
+                    "method": "GET"
+                  },
+                  {
+                    "path": "/comments",
+                    "method": "GET"
+                  },
+                  {
+                    "path": "/photos",
+                    "method": "GET"
+                  },
+                  {
+                    "path": "/albums",
+                    "method": "GET"
+                  },
+                  {
+                    "path": "/users",
+                    "method": "GET"
+                  },
+                  {
+                    "path": "/todos",
+                    "method": "GET"
+                  },
+                  {
+                    "path": "/posts",
+                    "method": "GET"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "definition": {
+          "location": "header",
+          "key": "version"
+        },
+        "org_id": "5e9d9544a1dcd60001d0ed20",
+        "id": "61b7a0f4f97ca60001e255bd"
+      }
+kind: ConfigMap
+metadata:
+  name: tyk-apidefs
