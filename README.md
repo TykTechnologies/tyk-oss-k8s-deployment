@@ -9,14 +9,14 @@ This contains deployment files to run
 $ git clone git@github.com:TykTechnologies/tyk-oss-k8s-deployment.git
 ```
 
-2. Deploy Tyk into k8s cluster
+2. Deploy Tyk into k8s cluster in `tyk` namespace
 ```
 $ ./launch-tyk.sh
 
 <bunch of resources created>
 ```
 
-3. Deploy APIClarity into k8s cluster using Helm
+3. Deploy APIClarity into own namespace in k8s cluster using Helm
 ```
 $ ./apiclarity.sh 
 
