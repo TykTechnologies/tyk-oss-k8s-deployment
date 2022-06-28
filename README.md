@@ -44,19 +44,20 @@ OR, use the [Tyk-Operator](https://github.com/TykTechnologies/tyk-operator) to d
 
 Following please find a few apis to help you getting started quickly
 
-1. Create an api
-  1. Check the current APIs:
-    `curl -s -H "x-tyk-authorization: foo" http://localhost:8080/tyk/apis  | jq '.[]| { api_id: .api_id, name: .name, listen_path: .proxy.listen_path }'`
 
+  1. Check the current APIs:
+```
+    curl -s -H "x-tyk-authorization: foo" http://localhost:8080/tyk/apis  | jq '.[]| { api_id: .api_id, name: .name, listen_path: .proxy.listen_path }'
+```
   2. Create a new api
-    ```
+```
     $ curl -s  -H "x-tyk-authorization: foo" http://localhost:8080/tyk/apis/ -d @my-api -X POST | jq .
     {
       "key": "2",
       "status": "ok",
       "action": "added"
     }
-    ```
+```
 
   3. If you check the list of APIs again ,you'll see no change. You need to hot reload the gateway so it'll start listening to the new api
   ```
