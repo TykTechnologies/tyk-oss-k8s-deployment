@@ -110,7 +110,7 @@ If combining with [Tyk Operator]((https://github.com/TykTechnologies/tyk-operato
 ```
 kubectl create secret -n tyk-operator-system generic tyk-operator-conf \
   --from-literal "TYK_AUTH=foo" \
-  --from-literal "TYK_ORG=oss" \
+  --from-literal "TYK_ORG=ce" \
   --from-literal "TYK_MODE=oss" \
   --from-literal "TYK_URL=http://tyk-svc.default.svc.cluster.local:8080"
 ```
