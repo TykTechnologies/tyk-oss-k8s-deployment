@@ -1,3 +1,6 @@
+# DEPRECATED
+Use https://github.com/TykTechnologies/tyk-k8s-demo instead
+
 # Tyk OSS Deployment
 
 This contains deployment files to run a Tyk GW with Redis in a kubernetes cluster.
